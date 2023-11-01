@@ -1,0 +1,32 @@
+name: 'Terraform'
+
+on: push
+
+jobs:
+    terraform:
+      name: 'Terraform'
+      runs-on: ubuntu-latest
+
+      defaults:
+        run:
+          shell: bash
+
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      - name: Terraform format
+        id: fmt
+        run: terraform fmt -check
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
+      - name: Terraform Validate
+        id: validate
+        if: (success() || failure())
+        run: terraform validate
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}   
