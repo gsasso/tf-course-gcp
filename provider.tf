@@ -7,7 +7,5 @@ terraform {
   }
 }
 
-provider "google" {
-  credentials = file("${path.module}/credentials/tf-demo-gcp-crendentials.json")
-  project     = var.project_id
-}
+
+

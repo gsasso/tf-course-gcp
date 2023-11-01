@@ -28,3 +28,6 @@ terraform.rc
 
 # Don't commit secrets
 tf-demo-gcp-crendentials.json
+
+# Don't push local backend
+local_backend.tf
