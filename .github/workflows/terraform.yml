@@ -22,7 +22,11 @@ jobs:
       - name: Terraform format
         id: fmt
         run: terraform fmt -check
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }} 
       - name: Terraform Validate
         id: validate
         if: (success() || failure())
         run: terraform validate
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}   
